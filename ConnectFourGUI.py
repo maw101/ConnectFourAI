@@ -22,6 +22,7 @@ class ConnectFourGUI(ConnectFourState):
         ConnectFourState()
         game_over = False
 
+        # display initial board state
         self.display_message(player_colours[self.move_count % 2] + " place your counter")
         self.render_grid()
 
@@ -47,7 +48,7 @@ class ConnectFourGUI(ConnectFourState):
 
                     if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
                         if self.is_winning_move(column_index):
-                            self.display_message("Player " + str((self.move_count % 2) + 1) + " has WON!")
+                            self.display_message(player_colours[(self.move_count) % 2] + " has WON!")
                             game_over = True
                         self.play_in_column(column_index)
                     else:
