@@ -37,9 +37,10 @@ class ConnectFourCLI(ConnectFourState):
                 # as play_in_column not called, move_count not incremented so player can play again
                 print("Invalid Column Entered")
 
+            # re-render grid
             self.render()
 
-            if (not game_over) and self.is_grid_full():
+            if (not game_over) and self.is_grid_full():  # draw
                 print("DRAW! Grid is Full")
                 game_over = True
 

@@ -42,12 +42,14 @@ class ConnectFourGUI(ConnectFourState):
                         colour = (255, 255, 0)  # yellow
                     pygame.draw.circle(self.window, colour, (event.pos[0], int(((1.5 * self.SQUARE_SIZE) / 2) + (0.25 * self.SQUARE_SIZE))), int((self.SQUARE_SIZE - 20) / 2))
                     self.render_grid()
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONDOWN:  # player has chosen a column
                     self.display_message(player_colours[(self.move_count + 1) % 2] + " place your counter")
+                    # determine the column the player wishes to place their counter in
                     column_index = int(math.floor(event.pos[0] / self.SQUARE_SIZE))
 
+                    # validate column index
                     if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
-                        if self.is_winning_move(column_index):
+                        if self.is_winning_move(column_index):  # player wins after playing current move
                             self.display_message(player_colours[(self.move_count) % 2] + " has WON!")
                             game_over = True
                         self.play_in_column(column_index)
@@ -55,7 +57,7 @@ class ConnectFourGUI(ConnectFourState):
                         # as play_in_column not called, move_count not incremented so player can play again
                         self.display_message("Cannot Place in Column #" + str(column_index + 1))
 
-                    if (not game_over) and self.is_grid_full():
+                    if (not game_over) and self.is_grid_full():  # draw
                         self.display_message("DRAW! Grid is Full")
                         game_over = True
 
@@ -67,20 +69,24 @@ class ConnectFourGUI(ConnectFourState):
         # hide previous message
         pygame.draw.rect(self.window, self.BACKGROUND_COLOUR, (0, 0, self.WINDOW_WIDTH, int(0.5 * self.SQUARE_SIZE)))
         # prepare and render new message
-        text_font = pygame.font.Font('freesansbold.ttf', 50)
+        text_font = pygame.font.Font('freesansbold.ttf', 50)  # set font
         text_surface = text_font.render(text, True, (255, 255, 255))
         text_rectangle = text_surface.get_rect()
-        text_rectangle.center = (int(self.WINDOW_WIDTH / 2), int(self.SQUARE_SIZE / 4))
-        self.window.blit(text_surface, text_rectangle)
+        text_rectangle.center = (int(self.WINDOW_WIDTH / 2), int(self.SQUARE_SIZE / 4))  # set the centre of the container
+        self.window.blit(text_surface, text_rectangle)  # add surface and rectangle to the window
+        # update the display
         pygame.display.update()
 
 
     def render_grid(self):
-        board_colour = (51, 153, 255)
-        radius = int((self.SQUARE_SIZE - 20) / 2)
+        board_colour = (51, 153, 255)  # store colour for the Connect 4 board (light blue)
+        radius = int((self.SQUARE_SIZE - 20) / 2)  # calculate radius for circles
         for row in reversed(range(0, self.BOARD_HEIGHT)):
             for column in range(0, self.BOARD_WIDTH):
+                # for each position:
+                # print the background for the position
                 pygame.draw.rect(self.window, board_colour, (column * self.SQUARE_SIZE, ((self.BOARD_HEIGHT - row) * self.SQUARE_SIZE) + int(0.5 * self.SQUARE_SIZE), self.SQUARE_SIZE-1, self.SQUARE_SIZE-1))
+                # determine what colour our circle should be
                 if self.board[column][row] == 0:
                     colour = self.BACKGROUND_COLOUR
                 elif self.board[column][row] == 1:
@@ -89,4 +95,5 @@ class ConnectFourGUI(ConnectFourState):
                     colour = (255, 255, 0)  # yellow
                 # add the circle to our render
                 pygame.draw.circle(self.window, colour, (int((column + 0.5) * self.SQUARE_SIZE), self.WINDOW_HEIGHT - int((row + 0.5) * self.SQUARE_SIZE)), radius)
+        # update the display
         pygame.display.update()
