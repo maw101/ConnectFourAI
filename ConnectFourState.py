@@ -57,5 +57,11 @@ class ConnectFourState:
                 return True
         return False
 
+    def is_grid_full(self):
+        for column in range(self.BOARD_WIDTH):
+            if self.can_play_in_column(column):
+                return False
+        return True
+
     def is_valid_column_input(self, column_index):
         return (column_index >= 0) and (column_index < self.BOARD_WIDTH)
