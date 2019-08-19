@@ -28,11 +28,19 @@ class ConnectFourCLI(ConnectFourState):
         while not game_over:
             column_index = int(input("Player " + str((self.move_count % 2) + 1) + " enter your column: "))
             if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
+                if self.is_winning_move(column_index):
+                    print("Player " + str((self.move_count % 2) + 1) + " has WON!")
+                    game_over = True
                 self.play_in_column(column_index)
             else:
                 # as play_in_column not called, move_count not incremented so player can play again
                 print("Invalid Column Entered")
+
             self.render()
+
+            if (not game_over) and self.is_grid_full():
+                print("DRAW! Grid is Full")
+                game_over = True
 
 
 
