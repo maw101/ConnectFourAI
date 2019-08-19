@@ -25,6 +25,7 @@ class ConnectFourCLI(ConnectFourState):
     def play_game(self):
         ConnectFourState()
         game_over = False
+        self.render()
         while not game_over:
             column_index = int(input("Player " + str((self.move_count % 2) + 1) + " enter your column: "))
             if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
