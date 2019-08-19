@@ -1,4 +1,5 @@
 class ConnectFourState:
+
     def __init__(self):
         self.BOARD_HEIGHT = 6
         self.BOARD_WIDTH = 7
@@ -20,7 +21,7 @@ class ConnectFourState:
         for digit in sequence:
             column_index = int(digit) - 1  # each digit is one-based
             if (column_index < 0) or (column_index >= self.BOARD_WIDTH) or \
-                (not self.can_play_in_column(column_index)) or self.is_winning_move(column_index):
+                    (not self.can_play_in_column(column_index)) or self.is_winning_move(column_index):
                 return None
             self.play_in_column(column_index)
         return len(sequence)
@@ -32,9 +33,9 @@ class ConnectFourState:
         #   to the top belong to the current player
         current_column_height = self.column_height[column_index]
         if (current_column_height >= 3) and \
-            (self.board[column_index][current_column_height - 1] == current_player_symbol) and \
-            (self.board[column_index][current_column_height - 2] == current_player_symbol) and \
-            (self.board[column_index][current_column_height - 3] == current_player_symbol):
+                (self.board[column_index][current_column_height - 1] == current_player_symbol) and \
+                (self.board[column_index][current_column_height - 2] == current_player_symbol) and \
+                (self.board[column_index][current_column_height - 3] == current_player_symbol):
             return True  # current player will have four in a row
 
         move_x = column_index
@@ -47,11 +48,14 @@ class ConnectFourState:
                 x = move_x + x_change
                 y = move_y + (x_change * y_change)
                 while (x >= 0) and (x < self.BOARD_WIDTH) and \
-                    (y >= 0) and (y < self.BOARD_HEIGHT) and \
-                    (self.board[x][y] == current_player_symbol):
+                        (y >= 0) and (y < self.BOARD_HEIGHT) and \
+                        (self.board[x][y] == current_player_symbol):
                     x += x_change
                     y += (x_change * y_change)
                     number_in_a_row += 1
             if number_in_a_row >= 3:
                 return True
         return False
+
+    def is_valid_column_input(self, column_index):
+        return (column_index >= 0) and (column_index < self.BOARD_WIDTH)
