@@ -11,8 +11,10 @@ class ConnectFourGUI(ConnectFourState):
         self.WINDOW_WIDTH = self.BOARD_WIDTH * self.SQUARE_SIZE
         self.WINDOW_HEIGHT = (self.BOARD_HEIGHT + 1) * self.SQUARE_SIZE
         self.WINDOW_SIZE = (self.WINDOW_WIDTH, self.WINDOW_HEIGHT)
+        self.BACKGROUND_COLOUR = (64, 64, 64)  # dark grey
         pygame.init()
         self.window = pygame.display.set_mode(self.WINDOW_SIZE)
+        self.window.fill(self.BACKGROUND_COLOUR)  # set background to be dark grey
 
     def play_game(self):
         ConnectFourState()
@@ -22,6 +24,17 @@ class ConnectFourGUI(ConnectFourState):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                if event.type == pygame.MOUSEMOTION:
+                    # want to draw a counter above the current column if can play there
+                    # draw a rectangle at the top to hide previous renders
+                    pygame.draw.rect(self.window, self.BACKGROUND_COLOUR, (0, 0, self.WINDOW_WIDTH, self.SQUARE_SIZE))
+                    # determine colour of the current players counter
+                    if (self.move_count % 2) + 1 == 1:
+                        colour = (255, 0, 0)  # red
+                    else:
+                        colour = (255, 255, 0)  # yellow
+                    pygame.draw.circle(self.window, colour, (event.pos[0], int(self.SQUARE_SIZE / 2)), int((self.SQUARE_SIZE - 20) / 2))
+                    self.render_grid()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print("Player " + str((self.move_count % 2) + 1) + " choose your column on the GUI")
                     column_index = int(math.floor(event.pos[0] / self.SQUARE_SIZE))
@@ -49,7 +62,7 @@ class ConnectFourGUI(ConnectFourState):
             for column in range(0, self.BOARD_WIDTH):
                 pygame.draw.rect(self.window, board_colour, (column * self.SQUARE_SIZE, (self.BOARD_HEIGHT - row) * self.SQUARE_SIZE, self.SQUARE_SIZE-1, self.SQUARE_SIZE-1))
                 if self.board[column][row] == 0:
-                    colour = (0, 0, 0)  # black
+                    colour = self.BACKGROUND_COLOUR
                 elif self.board[column][row] == 1:
                     colour = (255, 0, 0)  # red
                 else:
