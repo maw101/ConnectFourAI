@@ -7,3 +7,5 @@ from ConnectFourGUI import ConnectFourGUI
 #game.play_game()
 
 gameGUI = ConnectFourGUI()
+gameGUI.render_grid()
+gameGUI.play_game()
