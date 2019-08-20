@@ -1,11 +1,14 @@
 from ConnectFourCLI import ConnectFourCLI
 from ConnectFourGUI import ConnectFourGUI
+from ConnectFourAI import ConnectFourAI
 
-#game = ConnectFourCLI()
-#game.play_sequence_of_moves('23163416124767223154467471272416755633')
+game = ConnectFourCLI()
+ai = ConnectFourAI(game.BOARD_WIDTH)
+game.play_sequence_of_moves('71523214715215162525')
 #game.render()
-#game.play_game()
+#print(ai.solve(game))
+game.play_game()
 
-gameGUI = ConnectFourGUI()
-gameGUI.render_grid()
-gameGUI.play_game()
+#gameGUI = ConnectFourGUI()
+#gameGUI.render_grid()
+#gameGUI.play_game()
