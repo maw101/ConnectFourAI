@@ -1,5 +1,8 @@
 # Connect Four with AI
 
+AI aspect is currently in development.
+Details will be added in due course.
+
 ## Demos
 ### Player vs Player
 #### Graphical User Interface (GUI)
