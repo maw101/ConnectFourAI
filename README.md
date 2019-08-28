@@ -1,6 +1,6 @@
 # Connect Four with AI
 
-AI aspect is currently in development.
+The AI element is currently under development.
 Details will be added in due course.
 
 ## Demos
