@@ -8,7 +8,7 @@ The current state of the AI Element is as follows:
 * Utilises Alpha-Beta Pruning to narrow the exploration window by taking into account previously explored moves.
 * Scores moves from the centre outward as moves closer to the centre will be involved in more alignments.
 
-Future plans for the AI element to optimise it further include:
+Future plans to optimise the AI element further include:
 * Anticipation of losing moves
 * Iterative deepening
 * The implementation of a transposition table for the cachine of moves
