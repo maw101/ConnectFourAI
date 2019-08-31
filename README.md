@@ -11,7 +11,7 @@ The current state of the AI Element is as follows:
 Future plans to optimise the AI element further include:
 * Anticipation of losing moves
 * Iterative deepening
-* The implementation of a transposition table for the cachine of moves
+* The implementation of a transposition table for the caching of moves
 
 ## Key Releases
 * [Player Vs Player V1.0 Released with GUI and CLI Interfaces](https://github.com/maw101/ConnectFourAI/releases/tag/PvP-V1.0)
