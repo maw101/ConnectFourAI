@@ -1,5 +1,5 @@
 from ConnectFourState import ConnectFourState
-
+from ConnectFourAI import ConnectFourAI
 
 class ConnectFourCLI(ConnectFourState):
     def render(self):
@@ -23,11 +23,18 @@ class ConnectFourCLI(ConnectFourState):
         print()  # print blank line
 
     def play_game(self):
+        ai = ConnectFourAI(self.BOARD_WIDTH)
         ConnectFourState()
         game_over = False
         self.render()
         while not game_over:
-            column_index = int(input("Player " + str((self.move_count % 2) + 1) + " enter your column: "))
+            if (self.move_count % 2) + 1 == 1:
+                column_index = int(input("Player " + str((self.move_count % 2) + 1) + " enter your column: "))
+            else:
+                result = ai.solve(self)
+                print(result)
+                column_index = result[1]
+
             if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
                 if self.is_winning_move(column_index):
                     print("Player " + str((self.move_count % 2) + 1) + " has WON!")
