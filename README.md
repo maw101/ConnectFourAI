@@ -2,6 +2,7 @@
 
 ## AI Element
 **NOTE: The AI element is currently under development.**
+**This repository is not in active development due to other academic commitments taking priority.**
 
 The current state of the AI Element is as follows:
 * Utilises negamax recursive algorithm to score future moves from both players perspectives. Maximises the score for itself and minimising it for the opponent.
