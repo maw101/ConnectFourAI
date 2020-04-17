@@ -17,7 +17,6 @@ Future plans to optimise the AI element further include:
 ## Key Releases
 * [Player Vs Player V1.0 Released with GUI and CLI Interfaces](https://github.com/maw101/ConnectFourAI/releases/tag/PvP-V1.0)
 
-
 ## Demos
 ### Player vs Player
 [V1.0 Released with GUI and CLI Interfaces](https://github.com/maw101/ConnectFourAI/releases/tag/PvP-V1.0)
