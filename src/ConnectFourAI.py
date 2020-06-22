@@ -1,9 +1,6 @@
 import random
-import sys
 
-from ConnectFourState import ConnectFourState
 from copy import deepcopy
-
 
 class ConnectFourAI:
 
