@@ -3,6 +3,8 @@ from ConnectFourAI import ConnectFourAI
 
 class ConnectFourCLI(ConnectFourState):
     def render(self):
+        board = self.get_as_2d_board()
+        
         print()  # print blank line
         # print header
         header = ""
@@ -12,13 +14,11 @@ class ConnectFourCLI(ConnectFourState):
         # print separator under header
         print(((self.BOARD_WIDTH * 2) - 1) * "-")
         # print grid
-        for row in reversed(range(0, self.BOARD_HEIGHT)):
+        for row in range(0, self.BOARD_HEIGHT):
             row_string = ""
             for column in range(0, self.BOARD_WIDTH):
-                if self.board[column][row] == 0:
-                    row_string += "- "
-                else:
-                    row_string += str(self.board[column][row]) + " "
+                row_string += board[column][row] + ' '
+                    
             print(row_string)
         print()  # print blank line
 
@@ -32,14 +32,15 @@ class ConnectFourCLI(ConnectFourState):
                 column_index = int(input("Player " + str((self.move_count % 2) + 1) + " enter your column: "))
             else:
                 result = ai.solve(self)
-                print(result)
                 column_index = result[1]
+                print('AI Player (Player ' + str((self.move_count % 2) + 2) + ') has chosen to play in column #' + str(column_index))
 
             if self.is_valid_column_input(column_index) and self.can_play_in_column(column_index):
                 if self.is_winning_move(column_index):
                     print("Player " + str((self.move_count % 2) + 1) + " has WON!")
                     game_over = True
                 self.play_in_column(column_index)
+                
             else:
                 # as play_in_column not called, move_count not incremented so player can play again
                 print("Invalid Column Entered")

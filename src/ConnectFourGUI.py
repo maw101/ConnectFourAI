@@ -1,8 +1,8 @@
 import pygame
 import sys
 import math
-from ConnectFourState import ConnectFourState
 
+from ConnectFourState import ConnectFourState
 
 class ConnectFourGUI(ConnectFourState):
     def __init__(self):
@@ -84,20 +84,24 @@ class ConnectFourGUI(ConnectFourState):
 
 
     def render_grid(self):
+        board = self.get_as_2d_board()
+        
         board_colour = (51, 153, 255)  # store colour for the Connect 4 board (light blue)
         radius = int((self.SQUARE_SIZE - 20) / 2)  # calculate radius for circles
         for row in reversed(range(0, self.BOARD_HEIGHT)):
+            board_row_index = (self.BOARD_HEIGHT - 1) - row
             for column in range(0, self.BOARD_WIDTH):
                 # for each position:
                 # print the background for the position
                 pygame.draw.rect(self.window, board_colour, (column * self.SQUARE_SIZE, ((self.BOARD_HEIGHT - row) * self.SQUARE_SIZE) + int(0.5 * self.SQUARE_SIZE), self.SQUARE_SIZE-1, self.SQUARE_SIZE-1))
                 # determine what colour our circle should be
-                if self.board[column][row] == 0:
-                    colour = self.BACKGROUND_COLOUR
-                elif self.board[column][row] == 1:
+                if board[column][board_row_index] == '1':
                     colour = (255, 0, 0)  # red
-                else:
+                elif board[column][board_row_index] == '2':
                     colour = (255, 255, 0)  # yellow
+                else:
+                    colour = self.BACKGROUND_COLOUR
+                    
                 # add the circle to our render
                 pygame.draw.circle(self.window, colour, (int((column + 0.5) * self.SQUARE_SIZE), self.WINDOW_HEIGHT - int((row + 0.5) * self.SQUARE_SIZE)), radius)
         # update the display
