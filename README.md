@@ -2,14 +2,30 @@
 
 ## AI Element
 **NOTE: The AI element is currently under development.**
-**This repository is not in active development due to other academic commitments taking priority.**
 
-The current state of the AI Element is as follows:
-* Utilises negamax recursive algorithm to score future moves from both players perspectives. Maximises the score for itself and minimising it for the opponent.
-* Utilises Alpha-Beta Pruning to narrow the exploration window by taking into account previously explored moves.
-* Scores moves from the centre outward as moves closer to the centre will be involved in more alignments.
+### Optimisations
 
-Future plans to optimise the AI element further include:
+#### Negamax Search
+Implements the negamax recursive algorithm to minimise the possible loss for a worst-case scenario.
+
+The computer player wishes to maximise its score, future moves/board states are therefore scored from both players perspectives. Simply, it maximises the score for itself and minimises it for the opponent.
+
+#### Alpha-Beta Pruning
+Utilises Alpha-Beta Pruning to narrow the exploration window by taking into account previously explored moves.
+
+The number of nodes evaluated by the negamax search is therefore decreased. Evaluation for a move is stopped when there has been >= 1 other possibility found that proves the move to be worse than a previously explored move.
+
+#### Exploration Ordering
+We can further narrow the exploration window following Alpha-Beta Pruning by exploring columns closer to the centre and moving outwards. 
+
+This is as moves closer to the central column are involved in more alignments.
+
+#### Bitmap Encoding of Board States
+Our board state can be stored as a bit map. 
+
+(TODO: Complete)
+
+#### Future Optimisation Plans/Ideas
 * Anticipation of losing moves
 * Iterative deepening
 * The implementation of a transposition table for the caching of moves
